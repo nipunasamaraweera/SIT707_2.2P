@@ -51,7 +51,7 @@ public class SeleniumOperations {
          */
 
         // Find first input field which is firstname
-        WebElement firstNameElement = driver.findElement(By.id("firstname"));
+       WebElement firstNameElement = driver.findElement(By.id("firstname"));
         System.out.println("Found element: " + firstNameElement);
         // Send first name
         firstNameElement.sendKeys("Nipuna");
@@ -104,35 +104,45 @@ public class SeleniumOperations {
 
         System.out.println("Driver info: " + driver);
 
-        sleep(5);
+        sleep(10);
 
         // Load the alternative registration page.
         driver.get(url);
         
      // Find first input field which is firstname
-        WebElement firstNameElement = driver.findElement(By.id("firstname"));
+        WebElement firstNameElement = driver.findElement(By.id("ap_customer_name"));
         System.out.println("Found element: " + firstNameElement);
         // Send first name
-        firstNameElement.sendKeys("Nipuna");
+        firstNameElement.sendKeys("Nipuna Samaraweera1");
 
-        // Find following input fields and populate with values
-        WebElement lastNameElement = driver.findElement(By.id("lastname"));
-        lastNameElement.sendKeys("Thathsara");
         
-        WebElement emailElement = driver.findElement(By.id("email"));
-        emailElement.sendKeys("nipunathathsara@gmail.com");
+        WebElement emailElement = driver.findElement(By.id("ap_email"));
+        emailElement.sendKeys("nipunathathsara99@gmail.com");
         
-        // Inserting the phone number field
-        WebElement phoneNumberElement = driver.findElement(By.id("mobileNumber"));
-        phoneNumberElement.sendKeys("0414646980");
+        WebElement passwordElement = driver.findElement(By.id("ap_password"));
+        passwordElement.sendKeys("Test@2930");
+        
+        // Inserting the confirm password field
+        WebElement confirmPasswordElement = driver.findElement(By.id("ap_password_check"));
+        confirmPasswordElement.sendKeys("Test@2930");
+        
 
         // Identify button 'Create account' and click to submit using Selenium API.
-        WebElement createAccountButton = driver.findElement(By.xpath("//button[contains(text(),'Create account')]"));
+        WebElement createAccountButton = driver.findElement(By.id("continue"));
         createAccountButton.click();
-       
+        
+        
+     // Take screenshot using Selenium API and save the image file
+        File screenshotFile = ((TakesScreenshot) driver).getScreenshotAs(OutputType.FILE);
+        try {
+            FileUtils.copyFile(screenshotFile, new File("screenshot.png"));
+            System.out.println("Screenshot captured and saved as screenshot.png");
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
 
         // Sleep briefly to allow time for the screenshot to be captured.
-        sleep(5);
+        sleep(10);
 
         // Close the browser.
         driver.quit();
@@ -141,6 +151,6 @@ public class SeleniumOperations {
 
     public static void main(String[] args) {
         officeworks_registration_page("https://www.officeworks.com.au/app/identity/create-account");
-        alternative_registration_page("hhttps://login.kfc.com.au/auth/realms/kau/login-actions/registration?client_id=regkauprd8il3ex6t41pwa&tab_id=aOnwPTF-ki4");
+        alternative_registration_page("https://www.amazon.com.au/ap/register?showRememberMe=true&openid.pape.max_auth_age=900&openid.return_to=https%3A%2F%2Fwww.amazon.com.au%2Fgp%2Fyourstore%2Fhome%3Fpath%3D%252Fgp%252Fyourstore%252Fhome%26signIn%3D1%26useRedirectOnSuccess%3D1%26action%3Dsign-out%26ref_%3Dnav_AccountFlyout_signout&prevRID=W7WM53JCYJJPAGFR34X5&openid.assoc_handle=auflex&openid.mode=checkid_setup&prepopulatedLoginId=&failedSignInCount=0&pageId=auflex&openid.ns=http%3A%2F%2Fspecs.openid.net%2Fauth%2F2.0");
     }
 }
